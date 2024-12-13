@@ -55,7 +55,7 @@ export default function Terminal({ onClose }: TerminalProps) {
         <div className="flex items-center justify-between p-4 border-b border-white/10 bg-black/50">
           <div className="flex items-center gap-2">
             <TerminalIcon className="w-5 h-5" />
-            <span className="font-mono text-sm">ENTROPY_AI v1.0.0@[5qnp2ZwJNJ97fiWWJ6mFysfCd5gqyqye4fRoPKa6pump]</span>
+            <span className="font-mono text-sm">ENTROPY_AI v1.0.0@ [TBA]</span>
           </div>
           <div className="flex items-center gap-2">
             <button
