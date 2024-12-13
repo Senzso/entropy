@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 relative">
       <Background fadeOut={showTerminal} />
-      <div className="flex flex-col items-center space-y-12 z-10">
+      <div className="flex flex-col items-center space-y-8 z-10">
         <CountdownTimer />
         {!showTerminal && <EnterButton onClick={() => setShowTerminal(true)} />}
       </div>
