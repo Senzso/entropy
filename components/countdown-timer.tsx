@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { digital7 } from '../app/fonts'
 
 const COUNTDOWN_TARGET = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days from now
 
@@ -38,7 +37,7 @@ export default function CountdownTimer() {
   }, [])
 
   return (
-    <div className={`${digital7.className} text-white text-6xl tracking-wider animate-glow`}>
+    <div className="text-white text-6xl tracking-wider animate-glow font-mono">
       <div className="bg-black bg-opacity-70 backdrop-blur-sm rounded-lg p-6 shadow-lg border-2 border-white/20">
         <div className="grid grid-cols-4 gap-4 text-center">
           <div>
