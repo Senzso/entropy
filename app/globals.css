@@ -47,6 +47,11 @@ body {
   animation: glow 2s ease-in-out infinite;
 }
 
+.font-mono {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.1em;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
