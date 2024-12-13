@@ -33,30 +33,18 @@ export default function CountdownTimer() {
       setTimeLeft(calculateTimeLeft())
     }, 1000)
 
-    return () => clearInterval(timer)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
-    <div className="text-white text-6xl tracking-wider animate-glow font-mono">
-      <div className="bg-black bg-opacity-70 backdrop-blur-sm rounded-lg p-6 shadow-lg border-2 border-white/20">
-        <div className="grid grid-cols-4 gap-4 text-center">
-          <div>
-            <div>{String(timeLeft.days).padStart(2, '0')}</div>
-            <div className="text-xs uppercase mt-1">Days</div>
+    <div className="bg-black p-4 rounded-lg border border-white">
+      <div className="grid grid-cols-4 gap-4 text-center">
+        {Object.entries(timeLeft).map(([key, value]) => (
+          <div key={key} className="flex flex-col items-center">
+            <div className="text-4xl font-bold mb-1">{String(value).padStart(2, '0')}</div>
+            <div className="text-xs uppercase">{key}</div>
           </div>
-          <div>
-            <div>{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs uppercase mt-1">Hours</div>
-          </div>
-          <div>
-            <div>{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs uppercase mt-1">Minutes</div>
-          </div>
-          <div>
-            <div>{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs uppercase mt-1">Seconds</div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
