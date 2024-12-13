@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-const COUNTDOWN_TARGET = new Date('2023-11-15T22:00:00+01:00') // 3 days from now
+const COUNTDOWN_DURATION = 46 * 60 * 60 * 1000 + 11 * 60 * 1000; // 3 days from now
 
 export default function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
