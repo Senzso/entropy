@@ -1,33 +1,36 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-const COUNTDOWN_DURATION = 46 * 60 * 60 * 1000 + 7 * 60 * 1000; // 46 hours and 11 minutes in milliseconds
+const COUNTDOWN_DURATION = 46 * 60 * 60 * 1000 + 6 * 60 * 1000; // 46 hours and 11 minutes in milliseconds
 
 export default function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
-
-  function calculateTimeLeft() {
-    const now = new Date()
-    const targetTime = now.getTime() + COUNTDOWN_DURATION
-    const difference = targetTime - now.getTime()
-    
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 }
-    }
-    
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60)
-    }
-  }
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+  const targetTimeRef = useRef(Date.now() + COUNTDOWN_DURATION)
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    function calculateTimeLeft() {
+      const now = Date.now()
+      const difference = targetTimeRef.current - now
+      
+      if (difference <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 }
+      }
+      
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      }
+    }
+
+    function updateTimer() {
       setTimeLeft(calculateTimeLeft())
-    }, 1000)
+    }
+
+    updateTimer()
+    const timer = setInterval(updateTimer, 1000)
 
     return () => clearInterval(timer)
   }, [])
@@ -47,5 +50,4 @@ export default function CountdownTimer() {
     </div>
   )
 }
-
 
