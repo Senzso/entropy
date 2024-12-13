@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { TerminalIcon, X, Send } from 'lucide-react'
 import { useChat } from 'ai/react'
+import Image from 'next/image'
 
 interface TerminalProps {
   onClose: () => void
@@ -13,7 +14,7 @@ export default function Terminal({ onClose }: TerminalProps) {
   const [isVisible, setIsVisible] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: '/api/chat',
+    api: '/api/chat'
   })
 
   useEffect(() => {
@@ -35,11 +36,15 @@ export default function Terminal({ onClose }: TerminalProps) {
       {/* Neural Network Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 animate-pulse-slow">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bc1c4eb282f3f00e950ab1b9945bd41e-2pF4BtFyk5tX21ISPVSSQB3nKWfIz1.gif"
-            alt=""
-            className="w-full h-full object-cover animate-scale"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bc1c4eb282f3f00e950ab1b9945bd41e-2pF4BtFyk5tX21ISPVSSQB3nKWfIz1.gif"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover animate-scale"
+            />
+          </div>
         </div>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       </div>
@@ -96,7 +101,7 @@ export default function Terminal({ onClose }: TerminalProps) {
           ${isMinimized ? 'opacity-0' : 'opacity-100'}
         `}>
           <div className="flex items-center gap-2">
-            <span className="text-green-400 font-mono">></span>
+            <span className="text-green-400 font-mono">{'>'}</span>
             <input
               value={input}
               onChange={handleInputChange}
