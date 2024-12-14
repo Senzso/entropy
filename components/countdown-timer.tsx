@@ -1,17 +1,16 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
-const COUNTDOWN_DURATION = 46 * 60 * 60 * 1000 + 6 * 60 * 1000; // 46 hours and 11 minutes in milliseconds
+const TARGET_DATE = new Date('2023-12-15T22:00:00+01:00').getTime()
 
 export default function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-  const targetTimeRef = useRef(Date.now() + COUNTDOWN_DURATION)
 
   useEffect(() => {
     function calculateTimeLeft() {
       const now = Date.now()
-      const difference = targetTimeRef.current - now
+      const difference = TARGET_DATE - now
       
       if (difference <= 0) {
         return { days: 0, hours: 0, minutes: 0, seconds: 0 }
@@ -50,4 +49,6 @@ export default function CountdownTimer() {
     </div>
   )
 }
+
+
 
