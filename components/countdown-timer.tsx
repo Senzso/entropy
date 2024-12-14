@@ -2,13 +2,20 @@
 
 import { useState, useEffect } from 'react'
 
-const TARGET_DATE = new Date('2023-12-15T22:00:00+01:00').getTime()
+const TARGET_DATE = new Date('2024-12-15T22:00:00+01:00').getTime()
+
+interface TimeLeft {
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
 
 export default function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
 
   useEffect(() => {
-    function calculateTimeLeft() {
+    function calculateTimeLeft(): TimeLeft {
       const now = Date.now()
       const difference = TARGET_DATE - now
       
