@@ -28,7 +28,7 @@ export default function Terminal({ onClose }: TerminalProps) {
 
   return (
     <div className={`
-      relative z-10 w-full max-w-3xl
+      relative z-10 w-full max-w-3xl pointer-events-auto
       shadow-2xl transition-all duration-1000 ease-in-out overflow-hidden rounded-lg
       ${isMinimized ? 'h-16' : 'h-[80vh]'}
       ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
@@ -55,7 +55,7 @@ export default function Terminal({ onClose }: TerminalProps) {
         <div className="flex items-center justify-between p-4 border-b border-white/10 bg-black/50">
           <div className="flex items-center gap-2">
             <TerminalIcon className="w-5 h-5" />
-            <span className="font-mono text-sm">ENTROPY_AI v1.0.0@ [TBA]</span>
+            <span className="font-mono text-sm">ENTROPY_AI v1.0.0</span>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -77,7 +77,7 @@ export default function Terminal({ onClose }: TerminalProps) {
 
         {/* Terminal Messages */}
         <div className={`
-          flex-grow overflow-y-auto p-4 
+          flex-grow overflow-y-auto p-4 select-text
           transition-all duration-500
           ${isMinimized ? 'opacity-0' : 'opacity-100'}
         `}>
