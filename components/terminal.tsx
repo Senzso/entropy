@@ -136,7 +136,7 @@ export default function Terminal({ onClose }: TerminalProps) {
                   handleFormSubmit(e as unknown as FormEvent<HTMLFormElement>)
                 }
               }}
-              placeholder="Enter your command..."
+              placeholder="Press enter to access the terminal..."
               className={`w-full bg-transparent border-none outline-none font-mono text-sm text-white/90 placeholder:text-white/30 pl-6 transition-all duration-300 ${
                 isInputExpanded ? 'h-32 py-3' : 'h-16 py-2'
               }`}
