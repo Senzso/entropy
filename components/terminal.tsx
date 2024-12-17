@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, FormEvent } from 'react'
 import { TerminalIcon, X, Send } from 'lucide-react'
 import { useChat } from 'ai/react'
 import Image from 'next/image'
@@ -30,7 +30,7 @@ export default function Terminal({ onClose }: TerminalProps) {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === 'Enter' && !event.shiftKey) {
+      if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
         event.preventDefault()
         inputRef.current?.focus()
       }
@@ -42,6 +42,11 @@ export default function Terminal({ onClose }: TerminalProps) {
       document.removeEventListener('keydown', handleKeyPress)
     }
   }, [])
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleSubmit(e)
+  }
 
   return (
     <div className={`
@@ -112,7 +117,7 @@ export default function Terminal({ onClose }: TerminalProps) {
         </div>
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className={`
+        <form onSubmit={handleFormSubmit} className={`
           p-6 border-t border-white/10 bg-black/50
           transition-all duration-500
           ${isMinimized ? 'opacity-0 pointer-events-none' : 'opacity-100'}
@@ -125,6 +130,12 @@ export default function Terminal({ onClose }: TerminalProps) {
               onChange={handleInputChange}
               onFocus={() => setIsInputExpanded(true)}
               onBlur={() => setIsInputExpanded(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault()
+                  handleFormSubmit(e as unknown as FormEvent<HTMLFormElement>)
+                }
+              }}
               placeholder="Enter your command..."
               className={`w-full bg-transparent border-none outline-none font-mono text-sm text-white/90 placeholder:text-white/30 pl-6 transition-all duration-300 ${
                 isInputExpanded ? 'h-32 py-3' : 'h-16 py-2'
