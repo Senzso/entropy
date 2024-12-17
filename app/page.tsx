@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Background from '../components/background'
 import Terminal from '../components/terminal'
 import EnterButton from '../components/enter-button'
+import IconRefresher from '../components/IconRefresher'
 import CountdownTimer from '../components/countdown-timer'
 import CopyableText from '../components/copyable-text'
 
