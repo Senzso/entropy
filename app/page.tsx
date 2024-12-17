@@ -5,7 +5,6 @@ import Background from '../components/background'
 import Terminal from '../components/terminal'
 import EnterButton from '../components/enter-button'
 import CountdownTimer from '../components/countdown-timer'
-import IconRefresher from '../components/IconRefresher'
 import CopyableText from '../components/copyable-text'
 
 export default function Home() {
