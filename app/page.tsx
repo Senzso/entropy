@@ -16,7 +16,7 @@ export default function Home() {
       <IconRefresher />
       <Background fadeOut={showTerminal} />
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-        <CopyableText text="TBA" />
+        <CopyableText text="BhVNPyqpogyFsAnuEXHp3UCWfnEG6Y1hJwgLccyQpump" />
       </div>
       <div className="flex flex-col items-center space-y-8 z-10">
         <CountdownTimer />
