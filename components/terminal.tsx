@@ -14,6 +14,7 @@ export default function Terminal({ onClose }: TerminalProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [isInputExpanded, setIsInputExpanded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: '/api/chat'
   })
@@ -26,6 +27,21 @@ export default function Terminal({ onClose }: TerminalProps) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault()
+        inputRef.current?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
 
   return (
     <div className={`
@@ -104,6 +120,7 @@ export default function Terminal({ onClose }: TerminalProps) {
           <div className="flex items-center gap-2 relative">
             <span className="text-green-400 font-mono absolute left-2 top-4">{'>'}</span>
             <input
+              ref={inputRef}
               value={input}
               onChange={handleInputChange}
               onFocus={() => setIsInputExpanded(true)}
